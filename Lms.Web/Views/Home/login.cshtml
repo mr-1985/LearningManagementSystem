@@ -1,0 +1,207 @@
+﻿@model Lms.Core.ViewModels.LoginViewModel
+@{
+    ViewData["Title"] = "سامانه آموزش مجازی آریاساسول";
+
+}
+
+<html lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- Bootstrap -->
+    <link href="~/AdminContent/bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <link href="~/AdminContent/bootstrap-rtl/css/bootstrap-rtl.min.css" rel="stylesheet" />
+    <link href="~/AdminContent/font-awesome/css/font-awesome.min.css" rel="stylesheet" />
+
+    <link href="~/AdminContent/nprogress/css/nprogress.css" rel="stylesheet" />
+    <link href="~/AdminContent/nprogress/css/animate.min.css" rel="stylesheet" />
+
+    <link href="~/AdminContent/nprogress/css/nprogress.css" rel="stylesheet" />
+    <link href="~/AdminContent/build/css/custom.min.css" rel="stylesheet" />
+    <style>
+        .form-control {
+            display: block;
+            width: 100%;
+            height: 44px;
+            padding: 6px 12px;
+            font-size: 14px;
+            line-height: 1.42857143;
+        }
+
+        .login_wrapper {
+            right: 0;
+            margin: 0 auto;
+            margin-top: 1%;
+            max-width: 370px;
+            position: relative;
+        }
+
+
+        .login_content form input[type=submit] {
+            text-align: center;
+            float: none !important;
+            margin: 0px !important;
+        }
+
+        .btn {
+            font-size: 18px !important;
+        }
+    </style>
+</head>
+<body class="login">
+    <div>
+        <a class="hiddenanchor" id="signup"></a>
+        <a class="hiddenanchor" id="signin"></a>
+        <a class="hiddenanchor" id="reset"></a>
+        <div class="login_wrapper">
+            <div class="animate form login_form">
+                @if (ViewBag.EditProfile == true)
+                {
+                    <p class="text text-white text-center" style="color: white; background-color: red;">
+                        اطلاعات کاربری یا موفقیت به روز رسانی شد, جهت بارگزاری اطلاعات پروفایل دوباره لاگین کنید
+
+                    </p>
+                }
+
+                @if (ViewBag.Permission == false)
+                {
+                    <p class="text text-white text-center " style="color: white; background-color: red;" >شما مجوز دسترسی به این قسمت  را ندارید</p>
+                }
+                <section class="login_content">
+                    <form asp-action="Login" method="post">
+                        <img src="~/logo.png" class="img-responsive center-block" />
+                        <br />
+
+                        <div class="item form-group">
+
+                            <div class="col-md-12">
+                                <input asp-for="@Model.UserName" required="" class="form-control  " placeholder="نام کاربری را وارد نمایید" type="text">
+                                <span asp-validation-for="@Model.UserName" class="text-danger"></span>
+                                <span class="fa fa-user form-control-feedback left" aria-hidden="true"></span>
+
+                            </div>
+                        </div>
+                        <div class="item form-group">
+
+                            <div class="col-md-12">
+                                <input asp-for="@Model.Password" required="" class="form-control  " placeholder="کلمه عبور را وارد نمایید" type="password">
+                                <span class="fa fa-key form-control-feedback left" aria-hidden="true"></span>
+                                <span asp-validation-for="@Model.Password" class="text-danger"></span>
+                            </div>
+                        </div>
+                        <div class="item form-group">
+
+                            <input type="submit" class="btn btn-info btn-lg" value="ورود به سامانه  " />
+                            <a class="reset_pass" href="#">رمز ورود را از دست دادید؟</a>
+                        </div>
+                        <div class="clearfix"></div>
+                        <div class="separator">
+                            <p class="change_link">
+                                جدید در سایت؟
+                                <a href="#" class="text-primary to_register"> ایجاد حساب کاربری </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h4><i class="fa fa-comments"></i>  شرکت مگفا ارائه دهنده خدمات آموزشی!</h4>
+                                <p>کلیه حقوق این سایت متعلق به  شرکت مگفا می باشد</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <div id="register" class="animate form registration_form">
+                <section class="login_content">
+                    <form action="Register" method="post">
+                        <h1>ایجاد حساب</h1>
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" required="" name="firstname" placeholder="نام را وارد نمایید" />
+                            <div class="form-control-feedback">
+                                <i class="fa fa-user text-muted"></i>
+                            </div>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" required="" name="email" placeholder="نام خانوادگی را وارد نمایید" />
+                            <div class="form-control-feedback">
+                                <i class="fa fa-user text-muted"></i>
+                            </div>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" required="" name="email" placeholder="شماره همراه را وارد نمایید" />
+                            <div class="form-control-feedback">
+                                <i class="fa fa-mobile text-muted"></i>
+                            </div>
+                        </div>
+                        <div class="form-group has-feedback">
+                            <input type="password" class="form-control" required="" name="email" placeholder="کلمه عبور را وارد نمایید" />
+                            <div class="form-control-feedback">
+                                <i class="fa fa-key text-muted"></i>
+                            </div>
+                        </div>
+                        <div>
+                            <input type="submit" class="btn btn-info btn-lg" value="ثبت نام در سامانه" />
+                        </div>
+
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">
+                                در حال حاضر عضو هستید؟
+                                <a href="#signin" class="to_register"> ورود </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h4><i class="fa fa-comments"></i>  شرکت مگفا ارائه دهنده خدمات آموزشی!</h4>
+                                <p>کلیه حقوق این سایت متعلق به  شرکت مگفا می باشد</p>
+                            </div>
+                        </div>
+                    </form>
+                </section>
+            </div>
+            <div id="rest_pass" class="animate form rest_pass_form">
+                <section class="login_content">
+                    <!-- /password recovery -->
+                    <form action="index.html">
+                        <h1>بازیابی رمز عبور</h1>
+                        <div class="form-group has-feedback">
+                            <input type="text" class="form-control" name="email" placeholder="لطفا شماره همراه خود را وارد نمایید" required="" />
+                            <div class="form-control-feedback">
+                                <i class="fa fa-mobile-phone text-muted"></i>
+                            </div>
+                        </div>
+                        <input type="submit" class="btn btn-info btn-lg" value="بازیابی رمز عبور  " />
+                        <div class="clearfix"></div>
+
+                        <div class="separator">
+                            <p class="change_link">
+                                جدید در سایت؟
+                                <a href="#signup" class="to_register"> ایجاد حساب </a>
+                            </p>
+
+                            <div class="clearfix"></div>
+                            <br />
+
+                            <div>
+                                <h4><i class="fa fa-comments"></i>  شرکت مگفا ارائه دهنده خدمات آموزشی!</h4>
+                                <p>کلیه حقوق این سایت متعلق به  شرکت مگفا می باشد</p>
+                            </div>
+                        </div>
+                    </form>
+                    <!-- Password recovery -->
+                </section>
+            </div>
+        </div>
+    </div>
+</body>
+</html>
+

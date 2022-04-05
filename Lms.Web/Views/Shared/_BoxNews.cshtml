@@ -1,0 +1,22 @@
+﻿@model Lms.Core.ViewModels.NewsForArchiveViewModel
+
+<div class="col-lg-3 col-md-4 col-sm-6 col-xs-12 term-col">
+    <article>
+        <a href="/ShowNews/@Model.PageID" class="img-layer"><img style="height: 150px" src="/NewsPic/Thumb/@Model.ImageName"></a>
+        <h2>
+            <a href="/ShowNews/@Model.PageID"> @Model.Title </a>
+        </h2>
+        @*<h4>
+            @Model.ShortDescription
+        </h4>*@
+        <span>
+            <i class="zmdi zmdi-eye" style="position: inherit"></i> @Model.Visit
+            <i class="zmdi zmdi-comments" style="position: inherit"></i>@Model.PageComment.Count
+        </span>
+        <i class="zmdi zmdi-account">
+            <a @*href="/masters/AdminUser"*@>
+                @Model.AuthorName
+            </a>
+        </i>
+    </article>
+</div>

@@ -1,0 +1,121 @@
+﻿@using System.Security.Claims
+@using Lms.Core.Security
+@using Lms.Core.Services
+@using Lms.Core.Services.Interfaces
+
+@*@using Microsoft.AspNetCore.Authorization
+@inject IAuthorizationService AuthorizationService*@
+
+@using Lms.Core.ViewModels
+@inject IUserService _UserService
+
+@{
+
+    SideBarAdminPanelViewModel user =
+        _UserService.GetAdminPanelSideBarData(User.Identity.Name);
+
+}
+
+<div class="col-md-3 left_col hidden-print">
+    <div class="left_col scroll-view">
+        <div class="navbar nav_title" style="border: 0;">
+            <a href="/Admin/Index" class="site_title"><i class="fa fa-dashboard"></i> <span>پنل مدیریت</span></a>
+        </div>
+
+        <divfa class="clearfix"></divfa>
+
+        <!-- menu profile quick info -->
+        <div class="profile clearfix">
+            <div class="profile_pic">
+                <img src="/UserAvatar/@user.Avatar" alt="..." class="img-circle profile_img">
+            </div>
+            <div class="profile_info">
+                <span>خوش آمدید,</span>
+                <h2>@(user.FirstName + " " + user.LastName)</h2>
+            </div>
+        </div>
+        <!-- /menu profile quick info -->
+
+        <br />
+
+
+        <!-- sidebar menu -->
+
+        <div id="sidebar-menu" class="main_menu_side hidden-print main_menu">
+            <div class="menu_section">
+
+                <ul class="nav side-menu">
+                    @if (User.HasClaim(ClaimTypes.Role, "1")|| User.HasClaim(ClaimTypes.Role, "4"))
+                    {
+                        <li>
+                            <a href="/Admin/MyCourses"><i class="fa fa-dashboard"></i> دوره های من</a>
+                        </li>
+                    }
+                    <li>
+                        <a><i class="fa fa-user"></i> اطلاعات پروفایل <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="/Admin/Users/Profile">مشاهده پروفایل</a></li>
+                            <li><a href="/Admin/Users/EditProfile">ویرایش پروفایل</a></li>
+                            <li><a href="/Admin/Users/ChangePassword">ویرایش کلمه عبور</a></li>
+                            <li><a href="/Admin/MyOrders"> فاکتور ها</a></li>
+                            <li><a href="/Admin/Users/Wallet">کیف پول</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a><i class="fa fa-users"></i> مدیریت کاربران <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="/Admin/Users/">لیست کاربران</a></li>
+                            <li><a href="/Admin/Roles/">مدیریت نقش ها</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a><i class="fa fa-graduation-cap"></i> مدیریت دروس <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="/Admin/Courses">لیست دروس</a></li>
+                            <li><a href="/Admin/CourseGroups/">گروه ها</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="/Admin/Discount"><i class="fa fa-percent"></i> تخفیف ها</a>
+                    </li>
+
+                    <li>
+                        <a><i class="fa fa-pencil-square"></i> آزمون <span class="fa fa-chevron-down"></span></a>
+                        <ul class="nav child_menu">
+                            <li><a href="#">مدیریت آزمون</a></li>
+                            <li><a href="/Admin/Users/ExamResults">نتایج آزمون ها</a></li>
+                            <li><a href="/Admin/Users/UserExams">لیست آزمون ها</a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        <a href="/logout"><i class="fa fa-sign-out"></i> خروج از حساب کاربری</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- /sidebar menu -->
+        <!-- /menu footer buttons-->
+        <div class="sidebar-footer hidden-small">
+            <a data-toggle="tooltip" data-placement="top" title="" data-original-title="داشبورد" href="/admin">
+                <span class="fa fa-dashboard" aria-hidden="true"></span>
+            </a>
+            @*<a data-toggle="tooltip" data-placement="top" title="تمام صفحه" onclick="toggleFullScreen();">
+                    <span class="glyphicon glyphicon-fullscreen" aria-hidden="true"></span>
+                </a>*@
+            <a data-toggle="tooltip" data-placement="top" title="قفل" class="lock_btn">
+                <span class="glyphicon glyphicon-lock" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="خروج" href="/Logout">
+                <span class="glyphicon glyphicon-off" aria-hidden="true"></span>
+            </a>
+            <a data-toggle="tooltip" data-placement="top" title="صفحه اصلی" href="/">
+                <span class="glyphicon glyphicon-home" aria-hidden="true"></span>
+            </a>
+        </div>
+        <!-- /menu footer buttons -->
+    </div>
+</div>

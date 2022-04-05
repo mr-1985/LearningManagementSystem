@@ -1,0 +1,155 @@
+﻿@page
+@using Lms.Core.Convertors
+@using Lms.Core.Services
+@model Lms.Web.Pages.Admin.Quiz.IndexModel
+@{
+    ViewData["Title"] = " لیست آزمون های سایت";
+}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                لیست آزمون های سایت
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+
+                @if (Model.ExamForListAdmin.Exams.Count == 0)
+                {
+                    <div class="alert alert-danger ">
+                        رکوردی یافت نشد
+                    </div>
+                }
+
+                <div id="datatable-checkbox_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <form>
+                            <div class="col-md-4">
+
+                                <div class="col-md-2"><label>نمایش</label></div>
+                                <div class="col-md-10">
+                                    <select name="take" aria-controls="datatable-checkbox" class="form-control input-sm">
+                                        <option value="">پیش فرض</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select><label>دوره</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <input type="text" name="filter" class="form-control" value="@ViewData["Filter"]" placeholder="جست و جو ..." />
+
+                                <input type="submit" value="فیلتر کن" class="btn btn-success btn-round" />
+
+                                <a href="/Admin/Quiz/Index" class="btn btn-default btn-round">حذف فیلتر</a>
+                            </div>
+                        </form>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <a href="#" class="btn btn-success">افزودن آزمون جدید</a>
+                        <div class="col-sm-12">
+                            @{
+                                int rowCount = 1;
+                            }
+                            <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action dataTable no-footer" role="grid" aria-describedby="datatable-checkbox_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th>ردیف</th>
+                                        <th>کد آزمون</th>
+                                        <th>عنوان آزمون</th>
+                                        <th>عنوان دوره</th>
+                                        <th>تاریخ شروع</th>
+                                        <th>تاریخ پایان</th>
+                                        <th>مدت زمان آزمون</th>
+
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var item in Model.ExamForListShow)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                @rowCount
+                                            </td>
+                                            <td>
+                                                @item.ExamId
+                                            </td>
+                                            <td>
+                                                @item.ExamTitle
+                                            </td>
+                                            <td>
+                                                @item.CourseTitle
+                                            </td>
+                                            <td>
+                                                @item.ExamStartDate.ToShamsi()
+                                            </td>
+                                            <td>
+                                                @item.ExamEndDate.ToShamsi()
+                                            </td>
+                                            <td>
+                                                @item.ExamTime
+                                            </td>
+                                            <td>
+                                                @*<a href="/Admin/Courses/EditCourses/@item.CourseId" class="btn btn-warning btn-xs">ویرایش</a>
+                                                    <a href="/Admin/Courses/DeleteCourse/@item.CourseId" class="btn btn-danger btn-xs">حذف</a>
+                                                    <a href="/Admin/Courses/AddTeacherToClass/@item.CourseId" class="btn btn-primary btn-xs"> مربی دوره</a>
+                                                    <a href="/Admin/Courses/AddStudentToClass/@item.CourseId" class="btn btn-primary btn-xs"> فراگیران</a>
+                                                    <a href="/Admin/Quiz/IndexExam/@item.CourseId" class="btn btn-primary btn-xs"> ایجاد بانک سوالات</a>
+                                                    <a href="/Admin/Quiz/CreateExam/@item.CourseId" class="btn btn-primary btn-xs"> ایجاد آزمون</a>*@
+                                            </td>
+                                        </tr>
+                                        rowCount++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-5">
+                            <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">نمایش @ViewData["PageID"] تا @ViewData["Take"] از @Model.ExamForListAdmin.ExamCounts رکورد</div>
+                        </div>
+                        <div class="col-sm-7">
+
+                            <div class="btn-group">
+
+                                @if (Model.ExamForListAdmin.CurrentPage > 1)
+                                {
+                                    <a class="btn btn-default" href="/Admin/Quiz?pageId=@(Model.ExamForListAdmin.CurrentPage - 1)">قبلی</a>
+
+                                    <a class="btn btn-default" href="/Admin/Quiz?pageId=1">اولین صفحه</a>
+                                }
+
+                                @for (int i = 1; i <= Model.ExamForListAdmin.PageCount; i++)
+                                {
+                                    <a href="/Admin/Quiz/Index?pageId=@i" class="btn btn-default @((i == Model.ExamForListAdmin.CurrentPage) ? "btn btn-info" : "")">@i</a>
+                                }
+
+                                @if (Model.ExamForListAdmin.CurrentPage < Model.ExamForListAdmin.PageCount)
+                                {
+                                    <a class="btn btn-default" href="/Admin/Quiz?pageId=@(Model.ExamForListAdmin.CurrentPage + 1)">بعدی</a>
+
+                                    <a class="btn btn-default" href="/Admin/Quiz?pageId=@(Model.ExamForListAdmin.PageCount)">اخرین صفحه</a>
+                                }
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

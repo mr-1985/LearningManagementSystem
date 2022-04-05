@@ -1,0 +1,141 @@
+﻿@page "{id}"
+@model Lms.Web.Pages.Admin.Quiz.CreateNewQuestionModel
+@{
+    ViewData["Title"] = "ایجاد سوال جدید";
+}
+
+<form method="post">
+    <input type="hidden" asp-for="MultipleQuestion.CourseId" />
+    <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    ایجاد سوال جدید
+                </h2>
+                <ul class="nav navbar-right panel_toolbox">
+                    <li>
+                        <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                    </li>
+                </ul>
+                <div class="clearfix"></div>
+            </div>
+            <div class="x_content">
+                <div class="row">
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            متن سوال:
+                        </label>
+                        <div class="col-md-8">
+                            <textarea asp-for="MultipleQuestion.QuestionText" required="required" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10"></textarea>
+                            <span class="fa fa-expand form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="MultipleQuestion.QuestionText" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            گزینه 1:
+                        </label>
+                        <div class="col-md-8">
+                            <textarea asp-for="MultipleQuestion.Alternate1" required="required" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10"></textarea>
+                            <span class="fa fa-expand form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="MultipleQuestion.Alternate1" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            گزینه 2:
+                        </label>
+                        <div class="col-md-8">
+                            <textarea asp-for="MultipleQuestion.Alternate2" required="required" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10"></textarea>
+                            <span class="fa fa-expand form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="MultipleQuestion.Alternate2" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            گزینه 3:
+                        </label>
+                        <div class="col-md-8">
+                            <textarea asp-for="MultipleQuestion.Alternate3" required="required" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10"></textarea>
+                            <span class="fa fa-expand form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="MultipleQuestion.Alternate3" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            گزینه 4 :
+                        </label>
+                        <div class="col-md-8">
+                            <textarea asp-for="MultipleQuestion.Alternate4" required="required" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10"></textarea>
+                            <span class="fa fa-expand form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="MultipleQuestion.Alternate4" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            پاسخ صحیح :
+                        </label>
+                        <div class="col-md-8">
+                            <textarea asp-for="MultipleQuestion.CorrectAnswer" required="required" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10"></textarea>
+                            <span class="fa fa-expand form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="MultipleQuestion.CorrectAnswer" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <hr class="col-md-12" />
+                    <div class="item form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+                            <input type="submit" class="btn btn-success" value="ثبت" />
+                            <a asp-page="Index" class="btn btn-warning">انصراف</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="x_panel">
+            <div class="form-group">
+                <label>سطح سوال :</label>
+                <select class="form-control" asp-for="MultipleQuestion.LevelId" asp-items="@(ViewData["Levels"] as SelectList)"></select>
+                <span asp-validation-for="MultipleQuestion.LevelId"></span>
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+
+        CKEDITOR.replace('MultipleQuestion.QuestionText', {
+            customConfig: '/js/Config.js'
+        });
+        CKEDITOR.replace('MultipleQuestion.Alternate1', {
+            customConfig: '/js/Config.js'
+        });
+        CKEDITOR.replace('MultipleQuestion.Alternate2', {
+            customConfig: '/js/Config.js'
+        });
+        CKEDITOR.replace('MultipleQuestion.Alternate3', {
+            customConfig: '/js/Config.js'
+        });
+        CKEDITOR.replace('MultipleQuestion.Alternate4', {
+            customConfig: '/js/Config.js'
+        });
+        CKEDITOR.replace('MultipleQuestion.CorrectAnswer', {
+            customConfig: '/js/Config.js'
+        });
+
+    </script>
+}

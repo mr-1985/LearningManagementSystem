@@ -1,0 +1,131 @@
+﻿@using Lms.DataLayer.Entities
+@using Lms.DataLayer.Entities.News
+@model IEnumerable<Lms.Core.ViewModels.NewsForArchiveViewModel>
+
+@{
+    ViewData["Title"] = "Archive";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+    List<PageGroup> groups = ViewBag.Groups as List<PageGroup>;
+    List<int> selected = ViewBag.selectedGroups as List<int>;
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+            <li class="breadcrumb-item active"><a href="/Archive">مقالات</a></li>
+            @*<li class="breadcrumb-item active" aria-current="page"> برنامه نویسی </li>*@
+        </ul>
+    </nav>
+</div>
+
+<div class="container">
+    <form id="formFilter" action="/Archive" method="get">
+        <input type="hidden" id="pageid" name="pageId" value="@ViewBag.pageId.ToString()" />
+        <section class="term-categories">
+
+            <div class="top-bar">
+
+                <header>
+                    <h1>  <span> مقالات </span> </h1> <span> @Model.Count() مقاله </span>
+                </header>
+
+                <div class="row">
+                    <div class="col-md-4 col-sm-12 col-xs-12 pull-right">
+                        <div class="input">
+                            <input type="text" name="filter" placeholder="موضوع مورد نظر ...">
+                            <button><i class="zmdi zmdi-search"></i></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+                <aside class="col-lg-3 col-md-4 col-sm-12 col-xs-12">
+
+                    <section class="aside-section filter-by-category">
+                        <header>
+                            <h3> دسته بندی موضوعات </h3>
+                        </header>
+                        <div class="inner">
+                            <ul>
+                                @foreach (var group in groups.Where(g => g.ParentId == null))
+                                {
+                                    <li>
+                                        <input onchange="changeGroup()" type="checkbox" @((selected.Any(s => s == group.Id) ? "checked" : "")) name="selectedGroups" value="@group.Id" id="cat-1">
+                                        <label for="cat-1"> @group.GroupTitle </label>
+                                        @if (groups.Any(g => g.ParentId == group.Id))
+                                        {
+                                            <ul>
+                                                @foreach (var sub in groups.Where(g => g.ParentId == group.Id))
+                                                {
+                                                    <li>
+                                                        <input onchange="changeGroup()" @((selected.Any(s => s == sub.Id) ? "checked" : "")) type="checkbox" name="selectedGroups" value="@sub.Id" id="cat-1">
+                                                        <label for="cat-1"> @sub.GroupTitle </label>
+                                                    </li>
+                                                }
+                                            </ul>
+                                        }
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                    </section>
+                </aside>
+
+                <div class="col-lg-9 col-md-8 col-sm-12 col-xs-12">
+                    <section class="terms-items">
+                        <div class="row">
+                            @foreach (var item in Model)
+                            {
+                                <partial name="_BoxNews" model="@item" />
+                            }
+                        </div>
+                        <nav aria-label="Page navigation" class="pagination justify-content-center">
+                            <div class="btn-group">
+                                @if (ViewBag.currentPage > 1)
+                                {
+                                    <a class="btn btn-default" href="/Archive?pageId=@(ViewBag.currentPage - 1)">قبلی</a>
+
+                                    <a class="btn btn-default" href="/Archive?pageId=1">اولین صفحه</a>
+                                }
+
+                                @for (int i = 1; i <= ViewBag.PageCount; i++)
+                                {
+                                    <a href="/Archive?pageId=@i" class="btn btn-default @((i==ViewBag.currentPage)? "btn btn-info" : "")">@i</a>
+                                }
+
+                                @if (ViewBag.currentPage < ViewBag.PageCount)
+                                {
+                                    <a class="btn btn-default" href="/Archive?pageId=@(ViewBag.currentPage + 1)">بعدی</a>
+
+                                    <a class="btn btn-default" href="/Archive?pageId=@(ViewBag.PageCount)">اخرین صفحه</a>
+                                }
+                            </div>
+                        </nav>
+                    </section>
+                </div>
+            </div>
+        </section>
+    </form>
+</div>
+
+@section Scripts{
+    <script src="/HomePage/css/css/noUiSlider/nouislider.min.js"></script>
+    <script src="/HomePage/css/css/js/script.js"></script>
+
+    <script type="text/javascript">
+
+        function changePage(pageid) {
+            $("#pageid").val(pageid);
+            $("#formFilter").submit();
+        }
+
+        function changeGroup() {
+            $("#formFilter").submit();
+        }
+
+    </script>
+}
+
+

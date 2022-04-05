@@ -1,0 +1,185 @@
+﻿@using Lms.Core.Convertors
+@model Lms.Core.ViewModels.InformationUserPanelViewModel
+@{
+    ViewData["Title"] = "داشبورد";
+    //Layout = "~/Views/Shared/_DefaultLayout.cshtml";
+}
+
+@*<section class="banner inner-page">
+        <div class="banner-img" style="background-image: url(&quot;imagesºnnerquiz.jpg&quot;);"><img src="images\banner\quiz.jpg" alt="" style="display: none;"></div>
+        <div class="page-title">
+            <div class="container">
+                <h1>حساب کاربری</h1>
+            </div>
+        </div>
+    </section>
+    <section class="breadcrumb white-bg">
+        <div class="container">
+            <ul>
+                <li><a href="/">صفحه اصلی</a></li>
+                <li><a href="#">حساب کاربری</a></li>
+            </ul>
+        </div>
+    </section>
+
+    <section class="teacher-profile">
+        <div class="container">
+            <div class="teacher-name">
+                <h3>@Model.FirstName @Model.LastName</h3>
+            </div>
+            <div class="row">
+                <div class="col-md-4">
+                    <div class="img"><img src="/Quiz/images\team-member\img.jpg" alt=""></div>
+                </div>
+                <div class="col-md-8">
+                    <div class="my-account">
+                        <div class="account-tab">
+                            <ul>
+                                <li class="active"><a href="javascript:void(0);" id="profile">پروفایل</a></li>
+                                <li class=""><a href="javascript:void(0);" id="order">دوره های من</a></li>
+                                <li><a href="javascript:void(0);" id="changePassword"> تغییر رمز عبور</a></li>
+                            </ul>
+                        </div>
+                        <div class="tab-content profile-con open" style="display: none;">
+                            <div class="personal-edit">
+                                <a href="#"><i class="fa fa-pencil"></i><span>ویرایش پروفایل</span></a>
+                            </div>
+                            <div class="personal-information">
+                                <div class="info-slide">
+                                    <p><span>نام کاربری :</span>@Model.UserName</p>
+                                </div>
+                                <div class="info-slide">
+                                    <p><span>ایمیل :</span>@Model.Email</p>
+                                </div>
+                                <div class="info-slide">
+                                    <p><span>شماره تماس :</span>@Model.Mobile</p>
+                                </div>
+                                <div class="info-slide">
+                                    <p><span>تاریخ عضویت :</span>@Model.RegisterDate.ToShamsi()</p>
+                                </div>
+                                <div class="info-slide">
+                                    <p><span>جنسیت :</span>Male</p>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="tab-content order-con" style="display: block;">
+                            <table class="booking-viewTable">
+                                <tbody>
+                                    <tr>
+                                        <th>کد دوره</th>
+                                        <th class="detail"> جزئیات دوره</th>
+                                        <th>تاریخ ثبت</th>
+                                        <th>مبلغ</th>
+                                    </tr>
+                                    <tr>
+                                        <td><span class="small-heading">Courses ID</span>258452112500</td>
+                                        <td class="detail">
+                                            <span class="small-heading">Courses Details</span>
+                                            <div class="detailTd">
+                                                <label>Hiraba Farm</label>
+                                                <p>Behind Shalby Hospital, Garden Road, Prahlad Nagar , Ahmedabad-380015</p>
+                                            </div>
+                                        </td>
+                                        <td><span class="small-heading">Purchase Date</span>25<sup>th</sup> Aug 2015</td>
+                                        <td><span class="small-heading">Amount</span>Rs. 42,710</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                        <div class="tab-content changePassword-con" style="display: none;">
+                            <div class="change-password ">
+                                <div class="input-box">
+                                    <input type="text" placeholder="رمز عبور فعلی">
+                                </div>
+                                <div class="input-box">
+                                    <input type="text" placeholder=" رمز عبور جدید">
+                                </div>
+                                <div class="input-box">
+                                    <input type="text" placeholder=" تکرار رمز عبور جدید">
+                                </div>
+                                <div class="submit-box">
+                                    <input type="submit" value="ثبت" class="btn">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-12">
+                    <div class="sosiyal-share">
+                        <ul>
+                            <li><a href="#"><i class="fa fa-facebook"></i></a></li>
+                            <li><a href="#"><i class="fa fa-twitter"></i></a></li>
+                            <li><a href="#"><i class="fa fa-linkedin"></i></a></li>
+                            <li><a href="#"><i class="fa fa-skype"></i></a></li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>*@
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">تاپ لرن</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> پنل کاربری </li>
+        </ul>
+    </nav>
+</div>
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <div class="col-md-3 col-sm-4 col-xs-12">
+                    <aside>
+
+                        <div class="avatar-layer">
+                            <div class="img-layer">
+                                <a href="" class="change-image"><i class="zmdi zmdi-edit"></i></a>
+                                <img src="/UserAvatar/">
+                            </div>
+                            <div class="detail">
+                                <span> @Model.UserName </span>
+                                <span> عضویت : @Model.RegisterDate.ToShamsi() </span>
+                            </div>
+                        </div>
+
+                        <section>
+                            <header><h3> میز کار </h3></header>
+                            <div class="inner">
+                                <ul>
+                                    <li><a href=""> مشاهده حساب کابری </a></li>
+                                    <li><a href=""> ویرایش حساب کابری </a></li>
+                                    <li><a href=""> تغییر رمز عبور </a></li>
+                                    <li><a href=""> تنظیمات حساب کاربری </a></li>
+                                    <li><a href=""> خروج از حساب کاربری </a></li>
+                                </ul>
+                            </div>
+                        </section>
+                    </aside>
+                </div>
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> داشبورد </h1></header>
+                        <div class="inner">
+                            <div class="account-information">
+                                <h3> اطلاعات کاربری </h3>
+                                <ul>
+                                    <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری :  @Model.UserName </li>
+                                    <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Email </li>
+                                    <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.RegisterDate.ToShamsi() </li>
+                                    <li> <i class="zmdi zmdi-account"></i> موجودی حساب : @Model.Wallet تومان </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+
+
+

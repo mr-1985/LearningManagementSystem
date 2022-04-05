@@ -1,0 +1,31 @@
+﻿@page "{id}"
+@model Lms.Web.Pages.Admin.Courses.DeleteStudentModel
+@{
+    ViewData["Title"] = "حذف فراگیر";
+}
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                حذف فراگیر
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="alert alert-danger rounded text-danger">
+                آیا میخواهید این فراگیر را حذف نمایید ؟
+            </div>
+            <form method="post">
+                <input type="hidden" name="CourseId" value="@ViewData["CourseId"]" />
+                <input type="submit" class="btn btn-danger btn-round" value="حذف" />
+                <a asp-page="Index" class="btn btn-info btn-round">انصراف</a>
+            </form>
+        </div>
+    </div>
+</div>

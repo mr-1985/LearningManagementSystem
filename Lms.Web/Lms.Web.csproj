@@ -1,0 +1,66 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net5.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
+    <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="5.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Mvc.NewtonsoftJson" Version="5.0.0" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="5.0.8" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="5.0.8">
+      <PrivateAssets>all</PrivateAssets>
+      <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
+    </PackageReference>
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
+    <PackageReference Include="SharpCompress" Version="0.30.1" />
+    <PackageReference Include="ZarinPalSandbox" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Lms.Core\Lms.Core.csproj" />
+    <ProjectReference Include="..\Lms.DataLayer\Lms.DataLayer.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\CoursesPic\demoes\" />
+    <Folder Include="wwwroot\MyImages\" />
+    <Folder Include="wwwroot\courseFiles\" />
+    <Folder Include="wwwroot\CourseFilesOnline\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\AdminContent\kendoui\js\jquery.min.js" />
+    <None Include="wwwroot\AdminContent\kendoui\js\kendo.all.min.js" />
+    <None Include="wwwroot\AdminContent\kendoui\js\kendo.web.min.js" />
+    <None Include="wwwroot\AdminContent\kendoui\styles\fonts\glyphs\KendoUIGlyphs.svg" />
+    <None Include="wwwroot\AdminContent\kendoui\styles\fonts\glyphs\WebComponentsIcons.svg" />
+    <None Include="wwwroot\AdminContent\kendoui\styles\images\kendoui.svg" />
+    <None Include="wwwroot\Quiz\fonts\AvenirLTStdMedium_0.svg" />
+    <None Include="wwwroot\Quiz\fonts\AvenirLTStdMedium_0.woff2" />
+    <None Include="wwwroot\Quiz\fonts\fontawesome-webfont.svg" />
+    <None Include="wwwroot\Quiz\fonts\fontawesome-webfont.woff2" />
+    <None Include="wwwroot\Quiz\fonts\poetsenone-regular_0-webfont.woff2" />
+    <None Include="wwwroot\Quiz\images\stare-blank.svg" />
+    <None Include="wwwroot\Quiz\images\stare-fille.svg" />
+    <None Include="wwwroot\Quiz\js\bootstrap-datepicker.js" />
+    <None Include="wwwroot\Quiz\js\bootstrap.js" />
+    <None Include="wwwroot\Quiz\js\countdown-script.js" />
+    <None Include="wwwroot\Quiz\js\countdown.js" />
+    <None Include="wwwroot\Quiz\js\coustem.js" />
+    <None Include="wwwroot\Quiz\js\jquery-1.12.4.min.js" />
+    <None Include="wwwroot\Quiz\js\jquery.countdown.js" />
+    <None Include="wwwroot\Quiz\js\jquery.fancybox.pack.js" />
+    <None Include="wwwroot\Quiz\js\jquery.filterizr.js" />
+    <None Include="wwwroot\Quiz\js\jquery.form-validator.min.js" />
+    <None Include="wwwroot\Quiz\js\jquery.selectbox-0.2.js" />
+    <None Include="wwwroot\Quiz\js\map-styleMain.js" />
+    <None Include="wwwroot\Quiz\js\owl.carousel.js" />
+    <None Include="wwwroot\Quiz\js\placeholder.js" />
+  </ItemGroup>
+
+</Project>

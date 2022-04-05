@@ -1,0 +1,153 @@
+﻿@page
+@using Lms.Core.Convertors
+@model Lms.Web.Pages.Admin.MyCoursesModel
+@{
+    ViewData["Title"] = "دوره های من";
+}
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                لیست دوره ها
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @if (Model.MyCourseViewModel.CourseForUserListPage.Count == 0)
+                    {
+                        <div class="alert alert-danger ">
+                            رکوردی یافت نشد
+                        </div>
+                    }
+
+                <div id="datatable-checkbox_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <form>
+                            <div class="col-md-4">
+
+                                <div class="col-md-2"><label>نمایش</label></div>
+                                <div class="col-md-10">
+                                    <select name="take" aria-controls="datatable-checkbox" class="form-control input-sm">
+                                        <option value="">پیش فرض</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select><label>دوره</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <input type="text" name="filter" class="form-control" value="@ViewData["Filter"]" placeholder="جست و جو ..." />
+                                <input type="submit" value="فیلتر کن" class="btn btn-success btn-round" />
+                                <a href="/Admin/mycourses/" class="btn btn-default btn-round">حذف فیلتر</a>
+                            </div>
+                        </form>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-12">
+
+                            @{
+                                int rowCount = 1;
+                                if (Model.MyCourseViewModel.CurrentPage > 1)
+                                {
+                                    rowCount = Convert.ToInt32(ViewData["Take"].ToString());
+                                }
+                            }
+
+                            <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action dataTable no-footer" role="grid" aria-describedby="datatable-checkbox_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th>ردیف</th>
+                                        <th>تصویر دوره</th>
+                                        <th>نام دوره</th>
+                                        <th>کد دوره</th>
+                                        <th>وضعیت</th>
+                                        <th>تاریخ ثبت</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var item in Model.MyCourseViewModel.CourseForUserListPage)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                @rowCount
+                                            </td>
+                                            <td>
+                                                <img src="/CoursesPic/@item.CourseImage" class="img img-thumbnail" style="height: 70px;" />
+                                            </td>
+                                            <td>
+                                                @item.Title
+                                            </td>
+                                            <td>
+                                                @(item.CourseId)
+                                            </td>
+                                            <td>
+                                                @if (Convert.ToBoolean(item.IsActive))
+                                                {
+                                                    <span class="alert-success">فعال</span>
+                                                }
+                                                else
+                                                {
+                                                    <span class="alert-danger">غیر فعال</span>
+                                                }
+                                            </td>
+                                            <td>
+                                                @item.CreateDate.ToShamsi()
+                                            </td>
+
+                                            <td>
+                                                <a href="/Admin/VirtualClasses/@item.TeacherName" class="btn btn-warning btn-xs">ورود به کلاس مجازی</a>
+                                            </td>
+                                        </tr>
+                                        rowCount++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+
+                        <div class="col-sm-5">
+                            <div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">نمایش @ViewData["PageID"] تا @ViewData["Take"] از @Model.MyCourseViewModel.UserCounts رکورد</div>
+                        </div>
+                        <div class="col-sm-7">
+
+                            <div class="btn-group">
+                                @if (Model.MyCourseViewModel.CurrentPage > 1)
+                                {
+                                    <a class="btn btn-default" href="/Admin/mycourses?pageId=@(Model.MyCourseViewModel.CurrentPage-1)">قبلی</a>
+
+                                    <a class="btn btn-default" href="/Admin/mycourses?pageId=1">اولین صفحه</a>
+                                }
+
+                                @for (int i = 1; i <= Model.MyCourseViewModel.PageCount; i++)
+                                {
+                                    <a href="/Admin/mycourses/?pageId=@i" class="btn btn-default @((i==Model.MyCourseViewModel.CurrentPage)? "btn btn-info" : "")">@i</a>
+                                }
+
+                                @if (Model.MyCourseViewModel.CurrentPage < Model.MyCourseViewModel.PageCount)
+                                {
+                                    <a class="btn btn-default" href="/Admin/mycourses?pageId=@(Model.MyCourseViewModel.CurrentPage + 1)">بعدی</a>
+
+                                    <a class="btn btn-default" href="/Admin/mycourses?pageId=@(Model.MyCourseViewModel.PageCount)">اخرین صفحه</a>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,124 @@
+﻿@using Lms.Core.Security
+
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <partial name="_Styles" />
+
+    <!-- Kendo UI -->
+    <link href="~/AdminContent/kendoui/styles/kendo.common.min.css" rel="stylesheet" />
+    <link href="~/AdminContent/kendoui/styles/kendo.rtl.min.css" rel="stylesheet" />
+    <link href="~/AdminContent/kendoui/styles/kendo.default.min.css" rel="stylesheet" />
+
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="fontiran.com:license" content="Y68A9">
+    <link rel="icon" href="/AdminContent/images/favicon.ico" type="image/ico" />
+    <title> پنل مدیریت | @ViewData["Title"] </title>
+    @*<script src="~/AdminContent/jquery/jquery.min.js"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.bundle.min.js" crossorigin="anonymous"></script>*@
+
+    
+
+    <script src="/AdminContent/jquery/jquery.min.js"></script>
+
+    <script src="/AdminContent/bootstrap/js/bootstrap.min.js"></script>
+    <link href="~/css/jquery-ui.css" rel="stylesheet" />
+    <link href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css" />
+    <style>
+        .tile-stats .count {
+            min-height: 62px;
+        }
+    </style>
+    <partial name="_Styles" />
+
+</head>
+<!-- /header content -->
+<body class="nav-md">
+    <div class="container body">
+        <div class="main_container">
+
+            <partial name="_SideBarAdminPanel" />
+            <!-- top navigation -->
+            <div class="top_nav hidden-print">
+                <div class="nav_menu">
+                    <nav>
+                        <div class="nav toggle">
+                            <a id="menu_toggle"><i class="fa fa-bars"></i></a>
+                        </div>
+
+                        <ul class="nav navbar-nav navbar-right">
+                            <li class="">
+                                <a href="javascript:;" class="user-profile dropdown-toggle" data-toggle="dropdown"
+                                   aria-expanded="false">
+
+                                    @*<img src="/UserAvatar/@User)" alt="...">@User.Identity.Name*@
+                                    <span class=" fa fa-angle-down"></span>
+                                </a>
+                                <ul class="dropdown-menu dropdown-usermenu pull-right">
+
+                                    <li><a href="/Admin/ChangePassword"><i class="fa fa-user-secret pull-right"></i> تغییر کلمه عبور</a></li>
+                                    <li><a href="/Admin/EditProfile"><i class="fa fa-edit pull-right"></i> ویرایش پروفایل</a></li>
+                                    <li><a href="/Logout"><i class="fa fa-sign-out pull-right"></i> خروج از سامانه</a></li>
+                                </ul>
+                            </li>
+
+
+                        </ul>
+                    </nav>
+                </div>
+            </div>
+            <!-- /top navigation -->
+            <!-- /header content -->
+            <!-- page content -->
+            <div class="right_col" role="main">
+                <div class="">
+
+                    <div class="clearfix"></div>
+
+                    <div class="row">
+                        @RenderBody()
+                    </div>
+                </div>
+            </div>
+            <!-- /page content -->
+            <!-- /page content -->
+            <!-- footer content -->
+            <footer class="hidden-print">
+                <div class="pull-left">
+                    کلیه حقوق این سایت متعلق به هایپر119 می باشد.
+                </div>
+                <div class="clearfix"></div>
+            </footer>
+            <!-- /footer content -->
+        </div>
+    </div>
+    <div id="lock_screen">
+        <table>
+            <tr>
+                <td>
+                    <div class="clock"></div>
+                    <span class="unlock">
+                        <span class="fa-stack fa-5x">
+                            <i class="fa fa-square-o fa-stack-2x fa-inverse"></i>
+                            <i id="icon_lock" class="fa fa-lock fa-stack-1x fa-inverse"></i>
+                        </span>
+                    </span>
+                </td>
+            </tr>
+        </table>
+    </div>
+
+    <partial name="_Scripts" />
+
+    @RenderSection("Scripts", false)
+
+</body>
+</html>
+
+
+

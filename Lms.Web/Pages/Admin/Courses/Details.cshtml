@@ -1,0 +1,55 @@
+﻿@page "{id}"
+@using Lms.Core.Convertors
+@using Lms.DataLayer.Entities
+@model Lms.Web.Pages.Admin.Courses.DetailsModel
+
+
+@{
+    ViewData["Title"] = "جزئیات دوره";
+}
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                جزئیات دوره
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <p><img src="/CoursesPic/@Model.InformationCourseViewModel.CourseImage" /></p>
+            <p>
+                <h2>
+                    نام دوره : @(Model.InformationCourseViewModel.Title)
+                </h2>
+            </p>
+            <p> کد دوره: @Model.InformationCourseViewModel.Code</p>
+            <p>زمان دوره : @Model.InformationCourseViewModel.CourseTime</p>
+            <aside class="col-md-4 col-sm-12 col-xs-12 pull-right">
+                <div class="statistics">
+                    <article class="term-info">
+                        <ul>
+                            <li><a href="/Admin/Courses/AddTeacherToClass/@ViewData["CourseId"]" class="btn btn-primary btn-xs"> مربی دوره</a> </li>
+                            <li><a href="/Admin/Courses/AddStudentToClass/@ViewData["CourseId"]" class="btn btn-primary btn-xs"> فراگیران</a> </li>
+                            <li><a href="/Admin/Quiz/IndexExam/@ViewData["CourseId"]" class="btn btn-primary btn-xs"> ایجاد بانک سوالات</a> </li>
+                            <li><a href="/Admin/Quiz/CreateExam/@ViewData["CourseId"]" class="btn btn-primary btn-xs"> ایجاد آزمون</a>  </li>
+                        </ul>
+                    </article>
+                </div>
+            </aside>
+
+            @*<p>درباره دروه: @Html.Raw(Model.InformationCourseViewModel.AboutCourse)</p>*@
+
+        </div>
+       
+    </div>
+   
+</div>
+
+

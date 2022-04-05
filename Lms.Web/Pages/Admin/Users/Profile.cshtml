@@ -1,0 +1,31 @@
+﻿@page
+@using Lms.Core.Convertors
+@model Lms.Web.Pages.Admin.Users.ProfileModel
+@{
+    ViewData["Title"] = "داشبورد";
+}
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> داشبورد </h1></header>
+                        <div class="inner">
+                            <div class="account-information">
+                                <h3> اطلاعات کاربری </h3>
+                                <ul>
+                                    <li> <i class="zmdi zmdi-assignment-account"></i> نام کاربری :  @(Model.Information.FirstName+" "+@Model.Information.LastName) </li>
+                                    <li> <i class="zmdi zmdi-email"></i> ایمیل : @Model.Information.Email </li>
+                                    <li> <i class="zmdi zmdi-calendar-check"></i> تاریخ عضویت : @Model.Information.RegisterDate.ToShamsi() </li>
+                                    <li> <i class="zmdi zmdi-account"></i> موجودی حساب : @Model.Information.Wallet.ToString("#,0") تومان </li>
+                                </ul>
+                            </div>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>

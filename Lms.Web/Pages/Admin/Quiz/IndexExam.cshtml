@@ -1,0 +1,92 @@
+﻿@page "{id}"
+@model Lms.Web.Pages.Admin.Quiz.IndexExamModel
+@{
+    ViewData["Title"] = "افزودن سوالات چهار گزینه ای";
+}
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                لیست سوالات چهار گزینه ای
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @*@if (Model.GetStudentListViewModel.Count == 0)
+                    {
+                        <div class="alert alert-danger ">
+                            رکوردی یافت نشد
+                        </div>
+                    }*@
+
+                <div id="datatable-checkbox_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a asp-page="CreateNewQuestion" asp-route-id="@ViewData["CourseId"].ToString()" class="btn btn-success">افزودن سوالات چهار گزینه ای</a>
+                            <input type="button" id="addToClass" class="btn btn-danger" value="حذف سوال">
+                            @{
+                                int rowCountStudent = 1;
+                            }
+                            <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action dataTable no-footer" role="grid" aria-describedby="datatable-checkbox_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th><input type="checkbox" id="checkAllStudents" /></th>
+                                        <th>ردیف</th>
+                                        <th>متن سوال</th>
+                                        <th>درجه سختی سوال </th>
+                                        <th>فایل ضمیمه سوال</th>
+                                        <th>نوع سوال</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var question in Model.MultipleQuestions)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <input type="checkbox" class="checkBoxStudent" value="@question.QuestionId" />
+                                            </td>
+                                            <td>
+                                                @rowCountStudent
+                                            </td>
+                                            <td>
+                                                @Html.Raw(question.QuestionText)
+                                            </td>
+                                            <td>
+                                                @question.LevelTitle
+                                            </td>
+                                            <td>
+                                                @if (@question.QuestionFile == null)
+                                                {
+                                                    <p>ندارد</p>
+                                                }
+                                                else
+                                                {
+                                                    @question.QuestionFile
+                                                }
+                                            </td>
+                                            <td>
+                                                @question.TypeTitle
+                                            </td>
+                                        </tr>
+                                        rowCountStudent++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

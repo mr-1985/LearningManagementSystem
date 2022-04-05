@@ -1,0 +1,53 @@
+﻿@page
+@model Lms.Web.Pages.Admin.IndexModel
+@{
+    ViewData["Title"] = "داشبورد";
+    Layout = "~/Pages/Shared/_AdminLayout.cshtml";
+}
+<script type="text/javascript" src="https://canvasjs.com/assets/script/jquery.canvasjs.min.js"></script>
+
+
+<div class="row top_tiles">
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a href="/Admin/Users/agentlist">
+            <div class="tile-stats" style="background-color: #8c8e04">
+                <div class="icon"><i class="fa fa-users glyphicon-object-align-right"></i></div>
+                <div class="count"></div>
+                <h3> تعداد نمایندگی ها</h3>
+                <p>مشاهده</p>
+            </div>
+        </a>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a href="/admin/order/index">
+            <div class="tile-stats" style="background-color: #772c0f">
+                <div class="icon"><i class="fa fa-first-order glyphicon-object-align-right"></i></div>
+                <div class="count"></div>
+                <h3>تعداد سفارشات</h3>
+                <p>مشاهده</p>
+            </div>
+        </a>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a href="/Admin/Order/Index">
+            <div class="tile-stats" style="background-color: #60a91f">
+                <div class="icon"><i class="fa fa-buysellads glyphicon-object-align-right"></i></div>
+                <div class="count"></div>
+                <h3>تعداد فروش</h3>
+                <p>مشاهده</p>
+
+            </div>
+        </a>
+    </div>
+    <div class="animated flipInY col-lg-3 col-md-3 col-sm-6 col-xs-12">
+        <a href="/admin/order/index">
+            <div class="tile-stats" style="background-color: blueviolet">
+                <div class="icon"><i class="fa fa-dollar glyphicon-object-align-right"></i></div>
+                <div class="count"></div>
+                <h3>کل درآمد</h3>
+                <p>مشاهده</p>
+            </div>
+        </a>
+    </div>
+</div>
+<hr />

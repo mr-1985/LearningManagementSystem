@@ -1,0 +1,228 @@
+﻿@model Lms.DataLayer.Entities.Exam
+@{
+    ViewData["Title"] = "آزمون";
+    ////Layout = "~/Views/Shared/_Layout1.cshtml";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+@*<section class="banner inner-page">
+    <div class="banner-img" style="background-image: url(&quot;imagesºnnerquiz.jpg&quot;);">
+        <img src="/Quiz/images\banner\quiz.jpg" alt="" style="display: none;">
+    </div>
+    <div class="page-title">
+        <div class="container">
+            <h1>آزمون</h1>
+        </div>
+    </div>
+</section>
+
+<section class="breadcrumb white-bg">
+    <div class="container">
+        <ul>
+            <li><a href="#">Home</a></li>
+            <li><a href="#">Quiz</a></li>
+        </ul>
+    </div>
+</section>*@
+
+<span id="date" style="visibility: hidden">@Model.ExamEndDate </span>
+
+<form asp-controller="Exam"
+      asp-action="Results">
+
+    <input type="hidden" asp-for="ExamId" />
+    @*<input type="hidden" name="QuestionCount" value="6" />*@
+
+    @if (ViewBag.IsExistUserInExam != null)
+    {
+        <div class="alert alert-success">
+            <p class="help-block">شما قبلا در این آزمون شرکت کرده اید.</p>
+        </div>
+
+        <script>
+            // Your delay in milliseconds
+            var delay = 3000;
+            setTimeout(function () { window.location = "https://localhost:44399/Admin/Users/ExamResults"; }, delay);
+        </script>
+    }
+
+    @if (ViewBag.AccessDenied != null)
+    {
+        <div class="alert alert-success">
+            <p class="help-block">دسترسی شما قبل از شروع آزمون ممکن نیست.</p>
+        </div>
+
+        <script>
+            // Your delay in milliseconds
+            var delay = 3000;
+            /**/
+            setTimeout(function () { window.location = "https://localhost:44399/Admin/Users/UserExams"; }, delay);
+            /**/
+        </script>
+    }
+
+    @if (ViewBag.ExamTimeIsExpired != null)
+    {
+        <div class="alert alert-success">
+            <p class="help-block">زمان آزمون به پایان رسیده است.</p>
+        </div>
+
+        <script>
+            // Your delay in milliseconds
+            var delay = 3000;
+            /**/
+            setTimeout(function () { window.location = "https://localhost:44399/Admin/Users/UserExams"; }, delay);
+            /**/
+        </script>
+    }
+
+    <section class="quiz-view">
+        <div class="container">
+            <div class="quiz-title">
+                <h2>آزمون درس @Model.ExamTitle</h2>
+            </div>
+            <div class="row">
+                <div class="col-sm-4 col-md-3">
+                    <div>
+                        <h2 id="countdown" style="color: red">
+                            <div class="minutes" style="float: left">
+
+                            </div>
+                            <p style="float: left">:</p>
+                            <div class="seconds"></div>
+                        </h2>
+                    </div>
+                </div>
+                <div class="col-sm-8 col-md-9">
+                    <div class="qustion-main">
+                        <div class="qustion-box" id="Questions">
+
+
+                        </div>
+
+                        <div class="submit-quiz">
+                            <input type="submit" value="پایان آزمون" class="btn btn-danger" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</form>
+
+
+@section Scripts
+{
+    <script src="~/js/jquery.min.js"></script>
+    <script src="~/Quiz/js/jquery.unobtrusive-ajax.min.js"></script>
+
+    <script>
+        function getTimeRemaining(endtime) {
+            var t = Date.parse(endtime) - Date.parse(new Date());
+            var seconds = Math.floor((t / 1000) % 60);
+            var minutes = Math.floor((t / 1000 / 60) % 1);
+
+            return {
+                'total': t,
+                'minutes': minutes,
+                'seconds': seconds
+            };
+        }
+
+        function initializeClock(id, endtime) {
+            var clock = document.getElementById(id);
+
+            var minutesSpan = clock.querySelector('.minutes');
+            var secondsSpan = clock.querySelector('.seconds');
+
+            function updateClock() {
+                var t = getTimeRemaining(endtime);
+
+                minutesSpan.innerHTML = ('0' + t.minutes).slice(-2);
+                secondsSpan.innerHTML = ('0' + t.seconds).slice(-2);
+
+                if (t.total <= 0) {
+                    clearInterval(timeinterval);
+                }
+            }
+
+            updateClock();
+            var timeinterval = setInterval(updateClock, 1000);
+        }
+
+        var deadline = new Date(Date.parse(new Date()) + 60 * 60 * 1000);
+        initializeClock('countdown', deadline);
+
+        // ...................................
+        var _second = 1000; //زمان تاخیر
+        var _minute = _second * 60;
+        var _hour = _minute * 60;
+        var _day = _hour * 24;
+        var timer;
+        var date = document.getElementById('date').innerHTML;
+        var end = new Date(date).getTime() + (60 * _second);
+        //
+
+        function showRemaining() {
+            var now = new Date();
+            var distance = end - now;
+            if (distance < 0) {
+
+                clearInterval(timer);
+                document.getElementById('countdown').innerHTML = ' پایان آزمون !';
+
+                return;
+            }
+            var days = Math.floor(distance / _day);
+            var hours = Math.floor((distance % _day) / _hour);
+            var minutes = Math.floor((distance % _hour) / _minute);
+            var seconds = Math.floor((distance % _minute) / _second);
+
+            document.getElementById('countdown').innerHTML = hours + ":" + minutes + ":" + seconds;
+            //document.getElementById('countdown').innerHTML += hours + 'hrs ';
+            //document.getElementById('countdown').innerHTML += minutes + 'mins ';
+            //document.getElementById('countdown').innerHTML += seconds + 'secs';
+        }
+
+        timer = setInterval(showRemaining, 1000);
+
+        $(function() {
+            $("#Questions").load("/Exam/Questions/@Model.ExamId");
+        });
+
+        function pageQuestions(pageid) {
+            $("#Questions").load("/Exam/Questions/" + @Model.ExamId + "?pageId=" + pageid);
+        }
+
+        function SaveAnswer() {
+
+            /*$("#SaveAnswers").attr("disabled", true);*/
+
+            var questionId = $("#questionId").html();
+            var answer = $('input[name="Answer"]:checked').val();
+            var examId = @Model.ExamId;
+
+            $.ajax({
+                type: "POST",
+                url: "/Exam/Exam",
+                data: {
+                    "QuestionId": questionId,
+                    "userAnswer": answer,
+                    "ExamId": examId
+                },
+                //success:
+                //    function(response) {
+                //         alert(response.responseText);
+                //    },
+                failure: function(response) {
+                    alert(response.responseText);
+                },
+                error: function(response) {
+                    alert(response.responseText);
+                }
+            });
+        }
+
+    </script>
+
+}

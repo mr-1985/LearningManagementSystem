@@ -1,0 +1,88 @@
+﻿@using Lms.Core.Convertors
+@using Lms.DataLayer.Entities
+@model Lms.DataLayer.Entities.UserScore
+
+@{
+    //ViewData["Title"] = "ثبت نام";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<section class="banner inner-page">
+    <div class="banner-img" style="background-image: url(&quot;imagesºnnerquiz.jpg&quot;);"><img src="images\banner\quiz.jpg" alt="" style="display: none;"></div>
+    <div class="page-title">
+        <div class="container">
+            <h1>نتیجه آزمون</h1>
+        </div>
+    </div>
+</section>
+<section class="breadcrumb white-bg">
+    <div class="container">
+        <ul>
+            <li><a href="/">صفحه اصلی</a></li>
+            <li><a href="/Admin/Users/Profile">پنل کاربری</a></li>
+        </ul>
+    </div>
+</section>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>نتیجه آزمون</title>
+</head>
+<body>
+    <div class="text-center">
+        @if (Model.Score > 49)
+        {
+            <h2>Results: Pass</h2>
+        }
+        else
+        {
+            <h2>Results: Fail</h2>
+        }
+        <h3>Marks: @Model.Score</h3>
+
+        <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action dataTable no-footer" role="grid" aria-describedby="datatable-checkbox_info">
+            <thead>
+                <tr role="row">
+                    @*<th>ردیف</th>*@
+                    <th>کد آزمون</th>
+                    <th>عنوان آزمون</th>
+                    <th>عنوان دوره</th>
+                    <th>تاریخ شروع</th>
+                    <th>تاریخ پایان</th>
+                    <th>مدت زمان آزمون</th>
+                </tr>
+            </thead>
+
+            <tbody>
+                <tr role="row" class="odd">
+                    @*<td>
+                            @rowCount
+                        </td>*@
+                    <td>
+                        @Model.ExamId
+                    </td>
+                    <td>
+                        @Model.Exam.ExamTitle
+                    </td>
+                    <td>
+                        @Model.Exam.Course.Title
+                    </td>
+                    <td>
+                        @Model.Exam.ExamStartDate.ToShamsiDateTime()
+                    </td>
+                    <td>
+                        @Model.Exam.ExamEndDate.ToShamsiDateTime()
+                    </td>
+                    <td>
+                        @Model.Exam.ExamTime
+                    </td>
+                </tr>
+
+            </tbody>
+        </table>
+
+
+    </div>
+</body>
+</html>

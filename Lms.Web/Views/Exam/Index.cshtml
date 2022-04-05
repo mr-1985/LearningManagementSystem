@@ -1,0 +1,43 @@
+﻿@model IEnumerable<Lms.DataLayer.Entities.UserScore>
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h2>Index</h2>
+
+<h2>
+    Exams
+</h2>
+
+<div>
+    <table class="table ">
+        <tr>
+            <th>عنوان آزمون</th>
+            @*<th>ExamId</th>
+            <th>CourseId</th>*@
+            <th>عنوان دوره</th>
+            <th>نمره</th>
+            <th></th>
+        </tr>
+
+        @foreach (var item in Model)
+        {
+            <tr>
+                <th>@item.Exam.ExamTitle</th>
+                @*<th>@item.ExamId</th>
+                <th>@item.CourseId</th>*@
+                <th>@item.Exam.Course.Title</th>
+                <th>@item.Score</th>
+                <th>
+                    @*<button onclick="window.location.href = '/Exam/Exam/@item.ExamId'" rel="tooltip" class="btn btn-success">
+                        <i class="material-icons">شرکت در آزمون</i>
+                    </button>*@
+                </th>
+            </tr>
+        }
+    </table>
+</div>
+
+<div>
+    <a href="/Home/Index">Back Home</a>
+</div>

@@ -1,0 +1,250 @@
+﻿@page "{id}"
+@model Lms.Web.Pages.Admin.Courses.AddStudentToClassModel
+@{
+    ViewData["Title"] = "افزودن فراگیر به دوره";
+}
+<div class="col-md-12 col-sm-12 col-xs-12">
+
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                فراگیران کلاس
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @if (Model.GetStudentListInClass.Count == 0)
+                {
+                    <div class="alert alert-danger ">
+                        رکوردی یافت نشد
+                    </div>
+                }
+
+                <div id="datatable-checkbox_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="button" id="delete" class="btn btn-danger" value="حذف از کلاس">
+                            @{
+                                int rowCount = 1;
+                            }
+                            <table id="myTable" class="table table-striped table-bordered bulk_action dataTable no-footer" role="grid" aria-describedby="datatable-checkbox_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th><input type="checkbox" id="checkAll" /></th>
+                                        <th>ردیف</th>
+                                        <th>تصویر فراگیر</th>
+                                        <th>نام فراگیر </th>
+                                        <th>نام خانوادگی</th>
+                                        <th>شماره موبایل</th>
+                                        <th>نام کاربری</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    @foreach (var student in Model.GetStudentListInClass)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <input type="checkbox" class="checkBox" value="@student.UserId" />
+                                            </td>
+                                            <td>
+                                                @rowCount
+                                            </td>
+                                            <td>
+                                                <img class="img-circle" height="50" src="/UserAvatar/@student.UserAvatar" />
+                                            </td>
+                                            <td>
+                                                @student.FirstName
+                                            </td>
+                                            <td>
+                                                @student.LastName
+                                            </td>
+                                            <td>
+                                                @student.Mobile
+                                            </td>
+                                            <td>
+                                                @student.UserName
+                                            </td>
+                                            @*<td>
+                                                    <a id="DeleteButton" onclick="DeleteStudent(@student.UserId, @ViewData["courseId"].ToString());" class="btn btn-danger">حذف از کلاس</a>
+                                                </td>*@
+                                        </tr>
+                                        rowCount++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                انتخاب فراگیران
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+
+        <div class="x_content">
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @if (Model.GetStudentListViewModel.Count == 0)
+                {
+                    <div class="alert alert-danger ">
+                        رکوردی یافت نشد
+                    </div>
+                }
+
+                <div id="datatable-checkbox_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <input type="button" id="addToClass" class="btn btn-success" value="افزودن به کلاس">
+                            @{
+                                int rowCountStudent = 1;
+                            }
+                            <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action dataTable no-footer" role="grid" aria-describedby="datatable-checkbox_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th><input type="checkbox" id="checkAllStudents" /></th>
+                                        <th>ردیف</th>
+                                        <th>تصویر فراگیر</th>
+                                        <th>نام فراگیر </th>
+                                        <th>نام خانوادگی</th>
+                                        <th>شماره موبایل</th>
+                                        <th>نام کاربری</th>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+
+                                    @foreach (var teacherModel in Model.GetStudentListViewModel)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                <input type="checkbox" class="checkBoxStudent" value="@teacherModel.UserId" />
+                                            </td>
+                                            <td>
+                                                @rowCountStudent
+                                            </td>
+                                            <td>
+                                                <img class="img-circle" height="50" src="/UserAvatar/@teacherModel.UserAvatar" />
+                                            </td>
+                                            <td>
+                                                @teacherModel.FirstName
+                                            </td>
+                                            <td>
+                                                @teacherModel.LastName
+                                            </td>
+                                            <td>
+                                                @teacherModel.Mobile
+                                            </td>
+                                            <td>
+                                                @teacherModel.UserName
+                                            </td>
+                                        </tr>
+                                        rowCountStudent++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@section Scripts
+{
+    <script>
+
+        $(document).ready(function() {
+
+            $("#checkAllStudents").click(function() {
+                $(".checkBoxStudent").prop('checked',
+                    $(this).prop('checked'));
+            });
+
+            $("#addToClass").click(function() {
+                var selectedIDs = new Array();
+                $('input:checkbox.checkBoxStudent').each(function() {
+                    if ($(this).prop('checked')) {
+                        selectedIDs.push($(this).val());
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/AddStudentToClass",
+                    data: { "userId": selectedIDs, "courseId": @ViewData["courseId"].ToString() },
+                    
+                    success: function(response) {
+                        window.location.href = "/Admin/courses/AddStudentToClass/@ViewData["courseId"].ToString()";
+                    },
+                    failure: function(response) {
+                        alert(response.responseText);
+                    },
+                    error: function(response) {
+                        alert(response.responseText);
+                    }
+                    
+                });
+                
+            });
+
+        });
+
+
+        $(document).ready(function() {
+
+            $("#checkAll").click(function() {
+                $(".checkBox").prop('checked',
+                    $(this).prop('checked'));
+            });
+
+            $("#delete").click(function() {
+                var selectedIDs = new Array();
+                $('input:checkbox.checkBox').each(function() {
+                    if ($(this).prop('checked')) {
+                        selectedIDs.push($(this).val());
+                    }
+                });
+
+                $.ajax({
+                    type: "POST",
+                    url: "/Home/DeleteStudent",
+                    data: { "userId": selectedIDs, "courseId": @ViewData["courseId"].ToString() },
+
+                    success: function(response) {
+                        window.location.href  ="/Admin/courses/AddStudentToClass/@ViewData["courseId"].ToString()";
+                    },
+                    failure: function(response) {
+                        alert(response.responseText);
+                    },
+                    error: function(response) {
+                        alert(response.responseText);
+                    }
+
+                });
+            });
+        });
+
+    </script>
+}

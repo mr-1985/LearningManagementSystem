@@ -1,0 +1,139 @@
+﻿@using Lms.Core.Convertors
+@model Lms.DataLayer.Entities.News.Page
+@{
+    ViewData["Title"] = "ShowNews";
+    Layout = "~/Views/Shared/_HomeLayout.cshtml";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/"> صفحه اصلی </a></li>
+            <li class="breadcrumb-item active"><a href="/Archive"> مقالات </a></li>
+            <li class="breadcrumb-item active" aria-current="page"> @Model.Title </li>
+        </ul>
+    </nav>
+</div>
+
+<div class="container">
+    <section class="term-content">
+        <header><h1> @Model.Title </h1></header>
+        <div class="row">
+
+            <div class="col-md-8 col-sm-12 col-xs-12 pull-left">
+                <section class="term-description">
+                    <img src="/NewsPic/@Model.ImageName">
+
+                    @Html.Raw(Model.Text)
+
+                </section>
+
+                <section class="user-comments">
+                    <header><h3> نظرات کاربران </h3></header>
+                    <div class="inner">
+                        @if (User.Identity.IsAuthenticated)
+                        {
+                            <form asp-controller="News" asp-action="CreateComment"
+                                  data-ajax="true"
+                                  data-ajax-method="post"
+                                  data-ajax-mode="replace"
+                                  data-ajax-update="#listComment"
+                                  data-ajax-success="Success">
+                                <input type="hidden" name="comment.PageID" value="@Model.PageID" />
+                                <div class="row">
+                                    <div class="col-md-12 col-sm-12 col-xs-12">
+                                        <div class="form-group">
+                                            <textarea class="form-control" id="comment_Comment" name="comment.Comment" placeholder="متن نظر"></textarea>
+                                        </div>
+
+                                    </div>
+                                    <div class="col-xs-12">
+                                        <button type="submit" class="btn btn-success"> ثبت دیدگاه </button>
+                                    </div>
+                                </div>
+                            </form>
+                        }
+                        else
+                        {
+                            <div class="alert alert-danger">
+                                جهت درج نظر باید وارد سایت شوید
+                            </div>
+                        }
+
+                        <div class="comment-list" id="listComment">
+
+                        </div>
+                    </div>
+                </section>
+            </div>
+
+            <aside class="col-md-4 col-sm-12 col-xs-12 pull-right">
+                <article class="term-info">
+                    <ul>
+                        <article class="teacher-info">
+                            <img src="/UserAvatar/@Model.User.UserAvatar">
+                        </article>
+                        <li>
+                            <i class="zmdi zmdi-calendar"></i> @Model.CreateDate.ToShamsi()
+                        </li>
+                        <li>
+                            <i class="zmdi zmdi-eye" @*style="position: inherit"*@></i> @Model.Visit
+                        </li>
+                        <li>
+                            <i class="zmdi zmdi-comments" style="position: inherit"></i>@Model.PageComments.Count
+                        </li>
+                        <li>
+                            <i class="zmdi zmdi-account">
+                                <a @*href="/masters/AdminUser"*@>
+                                    @(Model.User.FirstName + " " + Model.User.LastName)
+                                </a>
+                            </i>
+                        </li>
+                    </ul>
+                </article>
+
+                <div class="share-layer">
+                    <span> به اشتراک گذاری </span>
+                    <a href=""><i class="zmdi zmdi-facebook"></i></a>
+                    <a href=""><i class="zmdi zmdi-google-old"></i></a>
+                    <a href=""><i class="zmdi zmdi-twitter"></i></a>
+                    <a href=""><i class="zmdi zmdi-linkedin"></i></a>
+                </div>
+
+                @if (Model.Tags != null)
+                {
+                    <div class="tags-layer">
+                        @foreach (string tag in Model.Tags.Split('-', StringSplitOptions.RemoveEmptyEntries))
+                        {
+                            <a href="/Archive?filter=@tag"> @tag </a>
+                        }
+                    </div>
+                }
+
+            </aside>
+        </div>
+    </section>
+</div>
+
+@section Scripts
+{
+    <script src="/js/jquery.unobtrusive-ajax.min.js"></script>
+    <script>
+        function Success() {
+            $("#comment_Comment").val("");
+        }
+
+        $(function() {
+            $("#listComment").load("/News/ShowComment/" + @Model.PageID);
+        });
+
+        function pageComment(pageid) {
+            $("#listComment").load("/News/ShowComment/" + @Model.PageID+"?pageId="+pageid);
+        }
+
+    </script>
+}
+
+
+
+

@@ -1,0 +1,109 @@
+﻿@page
+@model Lms.Web.Pages.Admin.Users.EditProfileModel
+
+@{
+    ViewData["Title"] = "ویرایش حساب کاربری";
+}
+
+<div class="container">
+    <nav aria-label="breadcrumb">
+        <ul class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">صفحه اصلی</a></li>
+            <li class="breadcrumb-item active" aria-current="page"> ویرایش پروفایل </li>
+        </ul>
+    </nav>
+</div>
+
+<main>
+    <div class="container">
+        <div class="user-account">
+            <div class="row">
+                <div class="col-md-9 col-sm-8 col-xs-12">
+                    <section class="user-account-content">
+                        <header><h1> ویرایش حساب کاربری </h1></header>
+                        <div class="inner form-layer">
+                            <form method="post" enctype="multipart/form-data">
+                                @if (ViewBag.IsSuccess != null)
+                                {
+                                    <div class="alert alert-success">
+                                        اطلاعات کاربری شما با موفقیت ویرایش شد
+                                    </div>
+                                }
+
+                                <input type="hidden" name="AvatarName" asp-for="EditProfileViewModel.AvatarName" />
+                                <div class="row">
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="fa fa-user"></i></span>
+                                            <input type="text" name="FirstName" class="form-control" asp-for="EditProfileViewModel.FirstName" placeholder="نام " aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="fa fa-user"></i></span>
+                                            <input type="text" name="LastName" class="form-control" asp-for="EditProfileViewModel.LastName" placeholder="نام خانوادگی" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="fa fa-user"></i></span>
+                                            <input type="text" name="UserName" class="form-control" asp-for="EditProfileViewModel.UserName" placeholder="نام کاربری" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="username"><i class="fa fa-mobile-phone"></i></span>
+                                            <input type="text" name="Mobile" class="form-control" asp-for="EditProfileViewModel.Mobile" placeholder="موبایل" aria-describedby="username">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <div class="input-group">
+                                            <span class="input-group-addon" id="email-address"><i class="fa fa-envelope"></i></span>
+                                            <input type="text" name="Email" required="" class="form-control" asp-for="EditProfileViewModel.Email" placeholder="ایمیل" aria-describedby="email-address">
+                                        </div>
+                                        <div class="text-danger" asp-validation-summary="All"></div>
+
+                                    </div>
+
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <p class="help-block">
+                                            آواتار
+                                        </p>
+                                        <input type="file" name="UserAvatar" asp-for="EditProfileViewModel.UserAvatar" />
+                                        <p>لطفا فقط تصویر انتخاب کنید</p>
+                                        <img class="thumbnail" id="imgAvatar" src="/UserAvatar/@Model.EditProfileViewModel.AvatarName" style="max-width: 150px" />
+                                    </div>
+                                    <div class="col-md-7 col-sm-8 col-xs-12">
+                                        <button class="btn btn-success"> ویرایش اطلاعات </button>
+                                    </div>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+@section Scripts
+{
+    <script>
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgAvatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#EditProfileViewModel_UserAvatar").change(function () {
+            readURL(this);
+        });
+    </script>
+}

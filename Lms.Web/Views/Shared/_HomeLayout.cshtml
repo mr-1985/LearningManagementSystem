@@ -1,0 +1,79 @@
+﻿@using System.Security.Claims
+<!DOCTYPE html>
+<html class="no-js" dir="rtl" lang="fa-IR">
+<head>
+    <meta charset="UTF-8">
+    <title>@ViewData["Title"]</title>
+    <meta name="googlebot" content="index,follow">
+    <meta name="robots" content="noodp,noydir">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" href="/HomePage/css/bootstrap.min.css">
+    <link rel="stylesheet" type="text/css" href="/HomePage/css/bootstrap-rtl.min.css">
+    <link rel="stylesheet" type="text/css" href="/HomePage/css/material-design-iconic-font.min.css">
+    <link href="~/HomePage/css/css/noUiSlider/nouislider.min.css" rel="stylesheet" />
+    <link rel="stylesheet" type="text/css" href="/HomePage/css/style.css">
+    <script src="/HomePage/js/jquery.min.js"></script>
+</head>
+<body>
+    <script src="/HomePage/js/modernizr-custom.js"></script>
+
+    <div class="landing-layer">
+        <div class="container">
+            <nav>
+                <div class="row">
+                    <div class="col-sm-6 col-xs-12">
+                        <ul>
+                            <li>
+                                <a href=""> همکاری در فروش </a>
+                                <a href=""> درباره ما </a>
+                                <a href=""> تماس با ما </a>
+                            </li>
+                        </ul>
+                    </div>
+                    <div class="col-sm-6 col-xs-12">
+                        <div class="clientarea">
+
+                            @if (User.Identity.IsAuthenticated)
+                            {
+                                <div class="loggein">
+                                    <i class="zmdi zmdi-account"></i><a href="https://localhost:44399/Admin/Users/Profile"> @User.Identity.Name ، خوش آمدید </a>
+                                    /
+                                    <a href="/Logout"> خروج </a>
+                                </div>
+                            }
+                            else
+                            {
+                                <div class="signin">
+                                    <i class="zmdi zmdi-account"></i>
+                                    <a href="/Login"> ورود </a> /
+                                    <a href="/Register"> عضویت </a>
+                                </div>
+                            }
+                        </div>
+                    </div>
+                </div>
+            </nav>
+            @RenderSection("SearchBox", false)
+        </div>
+    </div>
+
+    <!-- main manu -->
+    @await Component.InvokeAsync("CourseGroupComponent")
+    <!-- /main manu -->
+    <!-- content -->
+    @RenderBody()
+    <!-- /content -->
+    <!-- footer -->
+    <partial name="_Footer" />
+    <!-- /footer -->
+
+    <script src="/HomePage/js/bootstrap.min.js"></script>
+    <script src="/HomePage/js/script.js"></script>
+    <script src="/HomePage/js/jquery.validate.min.js"></script>
+    <script src="/HomePage/js/jquery.validate.unobtrusive.js"></script>
+    @RenderSection("Scripts", false)
+</body>
+</html>
+

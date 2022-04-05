@@ -1,0 +1,165 @@
+﻿@page "{id}"
+@model Lms.Web.Pages.Admin.News.EditNewsModel
+@{
+    ViewData["Title"] = "ویرایش خبر";
+}
+
+<form enctype="multipart/form-data" method="post">
+    <input type="hidden" asp-for="Page.PageID" />
+    <input type="hidden" asp-for="Page.CreateDate" />
+    <input type="hidden" asp-for="Page.ImageName" />
+    <div class="col-md-8 col-sm-12 col-xs-12">
+        <div class="x_panel">
+            <div class="x_content">
+                <div class="row">
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            عنوان :
+                        </label>
+                        <div class="col-md-8">
+                            <input asp-for="Page.Title" required="" class="form-control  " placeholder="لطفا عنوان را وارد کنید" type="text">
+                            <span class="fa fa-book form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="Page.Title" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            گروه خبری :
+                        </label>
+                        <div class="col-md-8">
+                            <select class="form-control" asp-for="Page.MainGroupId" asp-items="@ViewData["Groups"] as SelectList"></select>
+                            <span asp-validation-for="Page.MainGroupId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            نویسنده :
+                        </label>
+                        <div class="col-md-8">
+                            <select class="form-control" asp-for="Page.AuthorId" asp-items="@ViewData["Authors"] as SelectList"></select>
+                            <span asp-validation-for="Page.AuthorId" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            توضیح مختصر:
+                        </label>
+                        <div class="col-md-8">
+                            <textarea asp-for="Page.ShortDescription" required="required" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10"></textarea>
+                            <span class="fa fa-expand form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="Page.ShortDescription" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            متن :
+                        </label>
+                        <div class="col-md-8">
+                            <textarea asp-for="Page.Text" required="required" class="form-control" data-parsley-trigger="keyup" data-parsley-minlength="20" data-parsley-maxlength="100" data-parsley-validation-threshold="10"></textarea>
+                            <span class="fa fa-expand form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="Page.Text" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <div class="item form-group">
+                        <label class="control-label col-md-7  ">
+                            کلمات کلیدی :
+                        </label>
+                        <div class="col-md-8">
+                            <input asp-for="Page.Tags" required="" class="form-control  " placeholder="کلمات را با - جدا کنید" type="text">
+                            <span class="fa fa-book form-control-feedback left" aria-hidden="true"></span>
+                            <span asp-validation-for="Page.Tags" class="text-danger"></span>
+                        </div>
+                    </div>
+
+                    <hr />
+                    <div class="item  form-group">
+                        <label class="control-label col-md-7  ">
+                            نمایش در اسلایدر :
+                        </label>
+                        <div class="col-md-12 col-sm-12 col-xs-12  ">
+                            <input asp-for="Page.ShowInSlider" type="checkbox" class="js-switch" checked="" data-switchery="true" style="display: none;">
+                            &nbsp;
+                            <label>فعال / غیر فعال</label>
+                        </div>
+                    </div>
+
+                    <hr class="col-md-12" />
+                    <div class="item form-group">
+                        <div class="col-md-12 col-sm-12 col-xs-12 col-md-offset-5">
+                            <input type="submit" class="btn btn-success" value="ثبت" />
+                            <a asp-page="Index" class="btn btn-warning">انصراف</a>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-sm-12 col-md-4 col-lg-4">
+        <div class="x_panel">
+            <div class="x_title">
+                <h2>
+                    تصویر
+                </h2>
+                <div class="clearfix"></div>
+            </div>
+
+            <div class="x_content">
+                <img id="imgAvatar" src="/NewsPic/@Model.Page.ImageName" class="img-thumbnail" />
+                <input name="imgPageUp" id="imgPageUp" type="file" />
+            </div>
+
+        </div>
+    </div>
+</form>
+
+@section Scripts
+{
+    <script>
+
+        //$("#Course_GroupId").change(function () {
+        //    $("#Course_SubGroup").empty();
+        //    $.getJSON("/home/GetSubGroups/" + $("#Course_GroupId :selected").val(),
+        //        function (data) {
+
+        //            $.each(data,
+        //                function () {
+        //                    $("#Course_SubGroup").append('<option value=' + this.value + '>' + this.text + '</option>');
+
+        //                });
+        //        });
+        //});
+
+        function readURL(input) {
+
+            if (input.files && input.files[0]) {
+                var reader = new FileReader();
+
+                reader.onload = function (e) {
+                    $('#imgAvatar').attr('src', e.target.result);
+                }
+
+                reader.readAsDataURL(input.files[0]);
+            }
+        }
+
+        $("#imgPageUp").change(function () {
+            readURL(this);
+        });
+    </script>
+
+    <script src="https://cdn.ckeditor.com/4.9.2/standard/ckeditor.js"></script>
+    <script>
+
+        CKEDITOR.replace('Page_Text', {
+            customConfig: '/js/Config.js'
+        });
+
+    </script>
+}

@@ -1,0 +1,15 @@
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\bin\Release\net5.0\Lms.DataLayer.deps.json
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\bin\Release\net5.0\Lms.DataLayer.runtimeconfig.json
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\bin\Release\net5.0\Lms.DataLayer.runtimeconfig.dev.json
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\bin\Release\net5.0\Lms.DataLayer.dll
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\bin\Release\net5.0\ref\Lms.DataLayer.dll
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\bin\Release\net5.0\Lms.DataLayer.pdb
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Release\net5.0\Lms.DataLayer.csproj.AssemblyReference.cache
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Release\net5.0\Lms.DataLayer.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Release\net5.0\Lms.DataLayer.AssemblyInfoInputs.cache
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Release\net5.0\Lms.DataLayer.AssemblyInfo.cs
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Release\net5.0\Lms.DataLayer.csproj.CoreCompileInputs.cache
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Release\net5.0\Lms.DataLayer.dll
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Release\net5.0\ref\Lms.DataLayer.dll
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Release\net5.0\Lms.DataLayer.pdb
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Release\net5.0\Lms.DataLayer.genruntimeconfig.cache
