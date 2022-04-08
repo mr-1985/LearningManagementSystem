@@ -8,6 +8,7 @@ using System.Security.Claims;
 using System.Threading.Tasks;
 using Lms.Core.Services.Interfaces;
 using Lms.Core.ViewModels;
+using Lms.DataLayer.Entities;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
@@ -120,6 +121,34 @@ namespace Lms.Web.Controllers
                 }
             }
             ViewBag.News = news;
+
+            IEnumerable<CourseGroup> groups = null;
+
+            using (var client = new HttpClient())
+            {
+                client.BaseAddress = new Uri("https://localhost:44399/api/CourseGroupApi/");
+                //HTTP GET
+                var responseTask = client.GetAsync("https://localhost:44399/api/CourseGroupApi/");
+                responseTask.Wait();
+
+                var result = responseTask.Result;
+                if (result.IsSuccessStatusCode)
+                {
+                    var readTask = result.Content.ReadAsAsync<IList<CourseGroup>>();
+                    readTask.Wait();
+
+                    groups = readTask.Result;
+                }
+                else //web api sent error response 
+                {
+                    //log response status here..
+
+                    groups = Enumerable.Empty<CourseGroup>();
+
+                    ModelState.AddModelError(string.Empty, "Server error. Please contact administrator.");
+                }
+            }
+            ViewBag.CourseGroups = groups;
 
             return View(courses);
         }
