@@ -5,6 +5,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Pages\Admin\Gallery\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.AspNet.WebApi.Client" Version="5.2.7" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.EntityFrameworkCore" Version="5.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="5.0.0" />
@@ -27,7 +31,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Pages\Admin\Gallery\" />
     <Folder Include="wwwroot\CoursesPic\demoes\" />
     <Folder Include="wwwroot\GalleryImages\Thumb\" />
     <Folder Include="wwwroot\MyImages\" />
@@ -36,6 +39,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <None Include="Pages\Admin\Gallery\Index.cshtml" />
     <None Include="wwwroot\AdminContent\kendoui\js\jquery.min.js" />
     <None Include="wwwroot\AdminContent\kendoui\js\kendo.all.min.js" />
     <None Include="wwwroot\AdminContent\kendoui\js\kendo.web.min.js" />
@@ -63,6 +67,14 @@
     <None Include="wwwroot\Quiz\js\map-styleMain.js" />
     <None Include="wwwroot\Quiz\js\owl.carousel.js" />
     <None Include="wwwroot\Quiz\js\placeholder.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <UpToDateCheckInput Remove="Pages\Admin\Gallery\Index.cshtml" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <_ContentIncludedByDefault Remove="Pages\Admin\Gallery\Index.cshtml" />
   </ItemGroup>
 
 </Project>
