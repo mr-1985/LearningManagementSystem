@@ -29,6 +29,7 @@
   <ItemGroup>
     <Folder Include="Pages\Admin\Gallery\" />
     <Folder Include="wwwroot\CoursesPic\demoes\" />
+    <Folder Include="wwwroot\GalleryImages\Thumb\" />
     <Folder Include="wwwroot\MyImages\" />
     <Folder Include="wwwroot\courseFiles\" />
     <Folder Include="wwwroot\CourseFilesOnline\" />
