@@ -257,3 +257,4 @@ C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\bin\De
 C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\bin\Debug\net5.0\System.Web.Mvc.xml
 C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\bin\Debug\net5.0\System.Net.Http.Formatting.dll
 C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\bin\Debug\net5.0\Microsoft.AspNetCore.Mvc.NewtonsoftJson.dll
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\obj\Debug\net5.0\Razor\Pages\Admin\Gallery\CreateNewGalleryImage.cshtml.g.cs
