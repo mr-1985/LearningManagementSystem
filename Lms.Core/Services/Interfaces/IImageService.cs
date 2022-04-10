@@ -12,5 +12,7 @@ namespace Lms.Core.Services.Interfaces
     {
         int AddImage(Gallery gallery, IFormFile imgGallery);
        List<Gallery> GetAllImagesInGallery();
+       Gallery GetImageById(int imageId);
+       void UpdateImage(Gallery gallery, IFormFile imgGallery);
     }
 }

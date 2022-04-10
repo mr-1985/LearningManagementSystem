@@ -54,7 +54,7 @@
                     <hr />
                     <div class="row">
                         <div class="col-sm-12">
-                            <a href="/Admin/Users/CreateUser/" class="btn btn-success">افزودن تصاویر جدید</a>
+                            <a href="/Admin/Gallery/CreateNewGalleryImage/" class="btn btn-success">افزودن تصاویر جدید</a>
                             @{
                                 int rowCount = 1;
 
@@ -83,8 +83,8 @@
                                                 <img src="/GalleryImages/@item.GalleyImageName" class="img-circle" height="50" />
                                             </td>
                                             <td>
-                                                <a href="/Admin/Users/EditUser/@item.GalleryId" class="btn btn-warning btn-xs">ویرایش</a>
-                                                <a href="/Admin/Users/DeleteUser/@item.GalleryId" class="btn btn-danger btn-xs">حذف</a>
+                                                <a href="/Admin/Gallery/EditGallery/@item.GalleryId" class="btn btn-warning btn-xs">ویرایش</a>
+                                                <a href="/Admin/Gallery/DeleteGallery/@item.GalleryId" class="btn btn-danger btn-xs">حذف</a>
                                             </td>
                                         </tr>
                                         rowCount++;

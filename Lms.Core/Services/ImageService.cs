@@ -53,5 +53,46 @@ namespace Lms.Core.Services
         {
             return _context.Galleries.ToList();
         }
+
+        public Gallery GetImageById(int imageId)
+        {
+            return _context.Galleries.Find(imageId);
+        }
+
+        public void UpdateImage(Gallery gallery, IFormFile imgGallery)
+        {
+            if (imgGallery != null && imgGallery.IsImage())
+            {
+                if (gallery.GalleyImageName != "no-photo.jpg")
+                {
+                    string deleteimagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/GalleryImages", gallery.GalleyImageName);
+                    if (File.Exists(deleteimagePath))
+                    {
+                        File.Delete(deleteimagePath);
+                    }
+
+                    string deletethumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/GalleryImages/thumb", gallery.GalleyImageName);
+                    if (File.Exists(deletethumbPath))
+                    {
+                        File.Delete(deletethumbPath);
+                    }
+                }
+                gallery.GalleyImageName = GeneratorName.GenrateUniqeCode() + Path.GetExtension(imgGallery.FileName);
+                string imagePath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/GalleryImages", gallery.GalleyImageName);
+
+                using (var stream = new FileStream(imagePath, FileMode.Create))
+                {
+                    imgGallery.CopyTo(stream);
+                }
+
+                ImageConvertor imgResizer = new ImageConvertor();
+                string thumbPath = Path.Combine(Directory.GetCurrentDirectory(), "wwwroot/GalleryImages/thumb", gallery.GalleyImageName);
+
+                imgResizer.Image_resize(imagePath, thumbPath, 250);
+            }
+
+            _context.Galleries.Update(gallery);
+            _context.SaveChanges();
+        }
     }
 }
