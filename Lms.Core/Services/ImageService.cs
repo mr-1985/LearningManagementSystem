@@ -48,5 +48,10 @@ namespace Lms.Core.Services
 
             return gallery.GalleryId;
         }
+
+        public List<Gallery> GetAllImagesInGallery()
+        {
+            return _context.Galleries.ToList();
+        }
     }
 }

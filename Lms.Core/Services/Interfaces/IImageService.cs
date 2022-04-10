@@ -11,5 +11,6 @@ namespace Lms.Core.Services.Interfaces
     public interface IImageService
     {
         int AddImage(Gallery gallery, IFormFile imgGallery);
+       List<Gallery> GetAllImagesInGallery();
     }
 }
