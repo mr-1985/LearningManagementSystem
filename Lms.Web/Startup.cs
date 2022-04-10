@@ -72,6 +72,7 @@ namespace Lms.Web
             services.AddTransient<IExamService, ExamService>();
             services.AddTransient<INewsService, NewsService>();
             services.AddTransient<IViewRenderService, RenderViewToString>();
+            services.AddTransient<IImageService, ImageService>();
             //services.AddTransient<IEmailSender, EmailSender>();
             //services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
 

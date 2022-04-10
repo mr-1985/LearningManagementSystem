@@ -1,4 +1,5 @@
 ﻿@using Lms.Core.ViewModels
+@using Lms.DataLayer.Entities
 @*@model IEnumerable<Lms.Core.ViewModels.ShowCourseListItemViewModel>*@
 @{
     ViewData["Title"] = "سامانه آموزش مجازی آریاساسول";
@@ -20,6 +21,39 @@
         </form>
     </div>
 }
+
+<!-- main manu -->
+@{
+    List<CourseGroup> courseGroups = ViewBag.CourseGroups as List<CourseGroup>;
+}
+@if (courseGroups != null)
+{
+    <div class="main-menu">
+        <div class="container">
+            <nav>
+                <span class="responsive-sign"><i class="zmdi zmdi-menu"></i></span>
+                <ul>
+                    @foreach (var group in courseGroups.Where(g => g.ParentId == null))
+                    {
+                        <li>
+                            <a href="/Course?selectedGroups=@group.GroupId"> @group.GroupTitle </a>
+                            @if (courseGroups.Any(g => g.ParentId == group.GroupId))
+                            {
+                                <ul>
+                                    @foreach (var sub in courseGroups.Where(g => g.ParentId == group.GroupId))
+                                    {
+                                        <li><a href="/Course?selectedGroups=@sub.GroupId"> @sub.GroupTitle </a></li>
+                                    }
+                                </ul>
+                            }
+                        </li>
+                    }
+                </ul>
+            </nav>
+        </div>
+    </div>
+}
+<!-- /main manu -->
 
 <main id="home-page">
     <div class="container">

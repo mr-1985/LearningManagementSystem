@@ -15,7 +15,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 namespace Lms.Web.Pages.Admin.Courses
 {
     [Authorize]
-    [Authorize(Policy = "FacultyOnly")]
+    //[Authorize(Policy = "FacultyOnly")]
     //[Authorize(Roles = "4")]
     public class CreateCourseModel : PageModel
     {

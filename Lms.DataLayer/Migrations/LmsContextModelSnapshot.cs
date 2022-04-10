@@ -475,6 +475,27 @@ namespace Lms.DataLayer.Migrations
                     b.ToTable("ExamStudents");
                 });
 
+            modelBuilder.Entity("Lms.DataLayer.Entities.Gallery", b =>
+                {
+                    b.Property<int>("GalleryId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<DateTime>("CreateDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<string>("GalleyImageName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<bool>("IsDelete")
+                        .HasColumnType("bit");
+
+                    b.HasKey("GalleryId");
+
+                    b.ToTable("Galleries");
+                });
+
             modelBuilder.Entity("Lms.DataLayer.Entities.LocationStatus", b =>
                 {
                     b.Property<int>("Id")

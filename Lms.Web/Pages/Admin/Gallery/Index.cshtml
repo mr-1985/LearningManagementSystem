@@ -1,0 +1,127 @@
+﻿@page
+@model Lms.Web.Pages.Admin.Gallery.IndexModel
+@{
+    ViewData["Title"] = "لیست تصاویر";
+}
+
+<div class="col-md-12 col-sm-12 col-xs-12">
+    <div class="x_panel">
+        <div class="x_title">
+            <h2>
+                لیست  تصاویر
+            </h2>
+            <ul class="nav navbar-right panel_toolbox">
+                <li>
+                    <a class="collapse-link"><i class="fa fa-chevron-up"></i></a>
+                </li>
+            </ul>
+            <div class="clearfix"></div>
+        </div>
+        <div class="x_content">
+
+            <div class="col-md-12 col-sm-12 col-xs-12">
+                @*@if (Model.UserForAdminViewModel.Users.Count == 0)
+                    {
+                        <div class="alert alert-danger ">
+                            رکوردی یافت نشد
+                        </div>
+                    }*@
+
+                <div id="datatable-checkbox_wrapper" class="dataTables_wrapper form-inline dt-bootstrap no-footer">
+                    <div class="row">
+                        <form>
+                            <div class="col-md-4">
+
+                                <div class="col-md-2"><label>نمایش</label></div>
+                                <div class="col-md-10">
+                                    <select name="take" aria-controls="datatable-checkbox" class="form-control input-sm">
+                                        <option value="">پیش فرض</option>
+                                        <option value="10">10</option>
+                                        <option value="20">20</option>
+                                        <option value="50">50</option>
+                                        <option value="100">100</option>
+                                    </select><label>کاربر</label>
+                                </div>
+                            </div>
+
+                            <div class="col-md-8">
+                                <input type="text" name="filter" class="form-control" value="@ViewData["Filter"]" placeholder="جست و جو ..." />
+                                <input type="submit" value="فیلتر کن" class="btn btn-success btn-round" />
+                                <a href="/Admin/Users/" class="btn btn-default btn-round">حذف فیلتر</a>
+                            </div>
+                        </form>
+                    </div>
+                    <hr />
+                    <div class="row">
+                        <div class="col-sm-12">
+                            <a href="/Admin/Gallery/CreateNewGalleryImage/" class="btn btn-success">افزودن تصاویر جدید</a>
+                            @{
+                                int rowCount = 1;
+
+                                //if (Model.UserForAdminViewModel.CurrentPage > 1)
+                                //{
+                                //    rowCount = Convert.ToInt32(ViewData["Take"].ToString());
+                                //}
+                            }
+                            <table id="datatable-checkbox" class="table table-striped table-bordered bulk_action dataTable no-footer" role="grid" aria-describedby="datatable-checkbox_info">
+                                <thead>
+                                    <tr role="row">
+                                        <th>ردیف</th>
+                                        <th>تصویر</th>
+                                        <th>عملیات</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+
+                                    @foreach (var item in Model.Gallery)
+                                    {
+                                        <tr role="row" class="odd">
+                                            <td>
+                                                @rowCount
+                                            </td>
+                                            <td>
+                                                <img src="/GalleryImages/@item.GalleyImageName" class="img-circle" height="50" />
+                                            </td>
+                                            <td>
+                                                <a href="/Admin/Gallery/EditGallery/@item.GalleryId" class="btn btn-warning btn-xs">ویرایش</a>
+                                                <a href="/Admin/Gallery/DeleteGallery/@item.GalleryId" class="btn btn-danger btn-xs">حذف</a>
+                                            </td>
+                                        </tr>
+                                        rowCount++;
+                                    }
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-sm-5">
+                            @*<div class="dataTables_info" id="datatable-checkbox_info" role="status" aria-live="polite">نمایش @ViewData["PageID"] تا @ViewData["Take"] از @Model.UserForAdminViewModel.UserCounts رکورد</div>*@
+                        </div>
+                        <div class="col-sm-7">
+
+                            @*<div class="btn-group">
+                                    @if (Model.UserForAdminViewModel.CurrentPage > 1)
+                                    {
+                                        <a class="btn btn-default" href="/Admin/Users?pageId=@(Model.UserForAdminViewModel.CurrentPage-1)">قبلی</a>
+
+                                        <a class="btn btn-default" href="/Admin/Users?pageId=1">اولین صفحه</a>
+                                    }
+
+                                    @for (int i = 1; i <= Model.UserForAdminViewModel.PageCount; i++)
+                                    {
+                                        <a href="/Admin/Users/Index?pageId=@i" class="btn btn-default @((i==Model.UserForAdminViewModel.CurrentPage)? "btn btn-info" : "")">@i</a>
+                                    }
+
+                                    @if (Model.UserForAdminViewModel.CurrentPage < Model.UserForAdminViewModel.PageCount)
+                                    {
+                                        <a class="btn btn-default" href="/Admin/Users?pageId=@(Model.UserForAdminViewModel.CurrentPage + 1)">بعدی</a>
+                                        <a class="btn btn-default" href="/Admin/Users?pageId=@(Model.UserForAdminViewModel.PageCount)">اخرین صفحه</a>
+                                    }
+                                </div>*@
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

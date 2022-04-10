@@ -47,6 +47,7 @@ namespace Lms.DataLayer.Context
         public DbSet<CourseVote> CourseVotes { get; set; }
         public DbSet<Discount> Discounts { get; set; }
         public DbSet<UserDiscountCode> UserDiscountCodes { get; set; }
+        public DbSet<Gallery> Galleries { get; set; }
 
 
         #region Exam
