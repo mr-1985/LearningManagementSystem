@@ -260,3 +260,4 @@ C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\bin\De
 C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\obj\Debug\net5.0\Razor\Pages\Admin\Gallery\CreateNewGalleryImage.cshtml.g.cs
 C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\obj\Debug\net5.0\Razor\Pages\Admin\Gallery\Index.cshtml.g.cs
 C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\obj\Debug\net5.0\Razor\Pages\Admin\Gallery\EditGallery.cshtml.g.cs
+C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.Web\obj\Debug\net5.0\Razor\Pages\Admin\Gallery\DeleteGallery.cshtml.g.cs

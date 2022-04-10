@@ -12,4 +12,3 @@ C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\
 C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Debug\net5.0\ref\Lms.DataLayer.dll
 C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Debug\net5.0\Lms.DataLayer.pdb
 C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Debug\net5.0\Lms.DataLayer.genruntimeconfig.cache
-C:\Users\M.R\source\repos\Core\Example04\LearningManagementSystem\Lms.DataLayer\obj\Debug\net5.0\Lms.DataLayer.csproj.AssemblyReference.cache

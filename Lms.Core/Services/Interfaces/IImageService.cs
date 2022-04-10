@@ -14,5 +14,6 @@ namespace Lms.Core.Services.Interfaces
        List<Gallery> GetAllImagesInGallery();
        Gallery GetImageById(int imageId);
        void UpdateImage(Gallery gallery, IFormFile imgGallery);
+       void DeleteImage(int imageId);
     }
 }

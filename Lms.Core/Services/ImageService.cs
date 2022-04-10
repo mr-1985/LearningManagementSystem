@@ -51,7 +51,7 @@ namespace Lms.Core.Services
 
         public List<Gallery> GetAllImagesInGallery()
         {
-            return _context.Galleries.ToList();
+            return _context.Galleries.Where(i=>i.IsDelete==false).ToList();
         }
 
         public Gallery GetImageById(int imageId)
@@ -92,6 +92,14 @@ namespace Lms.Core.Services
             }
 
             _context.Galleries.Update(gallery);
+            _context.SaveChanges();
+        }
+
+        public void DeleteImage(int imageId)
+        {
+            var image = GetImageById(imageId);
+            image.IsDelete = true;
+            _context.Galleries.Update(image);
             _context.SaveChanges();
         }
     }
